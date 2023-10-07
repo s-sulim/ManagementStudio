@@ -21,7 +21,7 @@ namespace ManagementStudio.Classes
 
         private User(int ID, string Username, string Password, string CreationDate, Permissions PermissionLevel)
         {
-            if (!UserExistsWithID(ID))
+            if (!UserExists(ID))
             {
                 this.ID = ID;
                 this.Username = Username;
@@ -38,7 +38,7 @@ namespace ManagementStudio.Classes
         /// <param name="PermissionLevel"></param>
         public User(string Username, string Password, Permissions PermissionLevel)
         {
-            if (!UserExistsWithUsername(Username))
+            if (!UserExists(Username))
             {
                 MySQL.ExecuteNonQuery($"INSERT INTO Users (Username, Password, CreationDate, PermissionLevel) VALUES ('{Username}','{Password}','{DateTime.Now.ToString()}',{(int)PermissionLevel})");
             }
@@ -66,14 +66,14 @@ namespace ManagementStudio.Classes
             }
             return null;
         }
-        private bool UserExistsWithID(int userID)
+        private bool UserExists(int userID)
         {
             if (MySQL.ExecuteQuery($"SELECT * FROM Users WHERE UserID = {ID};").Rows.Count == 0)
                 return false;
             else
                 return true;
         }
-        private bool UserExistsWithUsername(string username)
+        private bool UserExists(string username)
         {
             if (MySQL.ExecuteQuery($"SELECT * FROM Users WHERE Username = '{username}';").Rows.Count == 0)
                 return false;
@@ -82,7 +82,6 @@ namespace ManagementStudio.Classes
         }
         public static List<User> GetAllUsers()
         {
-           
             var res = MySQL.ExecuteQuery($"SELECT * FROM Users;");
             List<User> users = new List<User>();    
             foreach (DataRow row in res.Rows)

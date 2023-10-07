@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManagementStudio.Forms"
         xmlns:userControls="clr-namespace:ManagementStudio.UserControls"
         mc:Ignorable="d"
-        Title="AddStudentWindow"  Height="479" Width="292" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Add student" Height="479" Width="292" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="/Forms/add_user.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -21,7 +21,7 @@
         <userControls:ClearableTextBox x:Name ="ctbEmail" Grid.Row="2" Height="40" Width="250" Hint="Email"/>
         <userControls:ClearableTextBox x:Name ="ctbPhoneNumber" Grid.Row="3" Height="40" Width="250" Hint="Phone number"/>
         <ComboBox Name="cbMajor" Grid.Row="4" Height="35" Width="250" FontSize="16" VerticalContentAlignment="Center"/>
-        <Button Name="btnSubmit" Grid.Row="5" Height="35" Width="60" FontSize="16" VerticalContentAlignment="Center" Margin="222,21,10,21" Content="OK"/>
+        <Button Name="btnSubmit" Grid.Row="5" Height="35" Width="60" FontSize="16" VerticalContentAlignment="Center"  Content="OK" Click="btnSubmit_Click"/>
     </Grid>
    
 </Window>

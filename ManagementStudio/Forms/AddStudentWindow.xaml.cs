@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementStudio.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,12 @@ namespace ManagementStudio.Forms
         {
             cbMajor.ItemsSource = Constants.Majors;
             cbMajor.SelectedIndex = 0;
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            Student student = new Student(ctbName.Text, ctbLastName.Text, ctbEmail.Text, ctbPhoneNumber.Text, cbMajor.Text);
+            this.DialogResult = true;
         }
     }
 }

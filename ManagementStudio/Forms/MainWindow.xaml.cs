@@ -25,6 +25,7 @@ namespace ManagementStudio.Forms
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             myDB = new MyDB();
             mySQL = new MySQLite();
             User adminUser = new User("admin","12345", Constants.Permissions.Admin);
@@ -33,12 +34,28 @@ namespace ManagementStudio.Forms
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
             AddStudentWindow addStudentWindow = new AddStudentWindow();
-            addStudentWindow.ShowDialog();
+            if (addStudentWindow.ShowDialog() == true)
+            {
+                gvStudents.Items.Clear();
+                foreach (Student student in Student.GetAllStudents())
+                {
+                    gvStudents.Items.Add(student);
+                }
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+          
+            foreach (Student student in Student.GetAllStudents())
+            {
+                gvStudents.Items.Add(student);
+            }
         }
     }
 }

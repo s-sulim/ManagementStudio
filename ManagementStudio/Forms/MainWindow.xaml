@@ -5,23 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementStudio.Forms"
         mc:Ignorable="d"
-        Title="My Students" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+        Title="My Students" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="5*"/>
 
         </Grid.RowDefinitions>
-        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="1">
+        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="1" Foreground="Black" FontSize="16" FontWeight="Bold" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                  IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Student ID"  Width="*"/>
-                <DataGridTextColumn Header="First name"  Width="*"/>
-                <DataGridTextColumn Header="Last name"  Width="*"/>
-                <DataGridTextColumn Header="Email" Width="*"/>
-                <DataGridTextColumn Header="Phone Number"  Width="*"/>
-                <DataGridTextColumn Header="Major"  Width="*"/>
+                <DataGridTextColumn Header="Student ID" Binding="{Binding StudentID}"  Width="*"/>
+                <DataGridTextColumn Header="First name"  Binding="{Binding FirstName}" Width="*"/>
+                <DataGridTextColumn Header="Last name"  Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="Email"  Binding="{Binding Email}" Width="*"/>
+                <DataGridTextColumn Header="Phone Number"  Binding="{Binding PhoneNumber}"  Width="*"/>
+                <DataGridTextColumn Header="Major"  Binding="{Binding Major}" Width="*"/>
             </DataGrid.Columns>
-
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="LightGreen"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="DarkGray"/>
+                </Style>
+            </DataGrid.Resources>
 
         </DataGrid>
         <ToolBar VerticalAlignment="Center" Grid.Row="0">

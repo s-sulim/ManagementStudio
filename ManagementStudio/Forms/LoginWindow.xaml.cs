@@ -47,11 +47,6 @@ namespace ManagementStudio
             }
         }
 
-        private void TextBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
              Login();
@@ -70,6 +65,10 @@ namespace ManagementStudio
                 MainWindow main = new MainWindow();
                 this.Hide();
                 main.Show();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password entered! Please, try again.", "Invalid username or passowrd", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }
