@@ -1,4 +1,5 @@
-﻿using ManagementStudio.Forms;
+﻿using ManagementStudio.Classes;
+using ManagementStudio.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,10 +24,14 @@ namespace ManagementStudio
     /// </summary>
     public partial class LoginWindow : Window, INotifyPropertyChanged
     {
+        private MySQLite mySQLite;
+        private List<User> allUsers;
         public LoginWindow()
         {
            
             DataContext = this;
+            mySQLite = new MySQLite();
+            allUsers = User.GetAllUsers();
             InitializeComponent();
         }
         private string boundText;
@@ -49,9 +54,8 @@ namespace ManagementStudio
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login();
+             Login();
         }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -61,7 +65,7 @@ namespace ManagementStudio
         }
         private void Login()
         {
-            if (ctbUsername.Text == "Admin" && ctbPassword.Password == "12345")
+            if (allUsers.Any(u => u.Username == ctbUsername.Text && u.Password == ctbPassword.Password))
             {
                 MainWindow main = new MainWindow();
                 this.Hide();

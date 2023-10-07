@@ -5,13 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementStudio.Forms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="My Students" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <DataGrid Name ="gvStudents" Grid.Column="0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="5*"/>
+
+        </Grid.RowDefinitions>
+        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Student ID"  Width="*"/>
+                <DataGridTextColumn Header="First name"  Width="*"/>
+                <DataGridTextColumn Header="Last name"  Width="*"/>
+                <DataGridTextColumn Header="Email" Width="*"/>
+                <DataGridTextColumn Header="Phone Number"  Width="*"/>
+                <DataGridTextColumn Header="Major"  Width="*"/>
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+        <ToolBar VerticalAlignment="Center" Grid.Row="0">
+            <Button x:Name="btnAddStudent" Content="Add student" Click="btnAddStudent_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </ToolBar>
     </Grid>
-   
+
 </Window>

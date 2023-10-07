@@ -79,6 +79,11 @@
     </ApplicationDefinition>
     <Compile Include="Classes\MyDB.cs" />
     <Compile Include="Classes\MySQLite.cs" />
+    <Compile Include="Classes\Constants.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Forms\AddStudentWindow.xaml.cs">
+      <DependentUpon>AddStudentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +93,10 @@
     <Compile Include="UserControls\ClearableTextBox.xaml.cs">
       <DependentUpon>ClearableTextBox.xaml</DependentUpon>
     </Compile>
+    <Page Include="Forms\AddStudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
