@@ -38,6 +38,10 @@ namespace ManagementStudio.UserControls
             {
                 return tbInput.Text;
             }
+            set
+            {
+                tbInput.Text = value;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManagementStudio.Forms"
         xmlns:userControls="clr-namespace:ManagementStudio.UserControls"
         mc:Ignorable="d"
-        Title="Add student" Height="479" Width="292" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="/Forms/add_user.png">
+        Title="Add student" Height="479" Width="292" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="/Forms/Images/add_user.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,7 +17,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <userControls:ClearableTextBox x:Name ="ctbName" Grid.Row="0" Height="40" Width="250" Hint="Name"/>
-        <userControls:ClearableTextBox x:Name ="ctbLastName" Grid.Row="1" Height="40" Width="250" Hint="Last name"/>
+        <userControls:ClearableTextBox x:Name ="ctbLastName" Grid.Row="1" Height="40" Width="250" Hint="Last name" TouchLeave="ctbLastName_TouchLeave"/>
         <userControls:ClearableTextBox x:Name ="ctbEmail" Grid.Row="2" Height="40" Width="250" Hint="Email"/>
         <userControls:ClearableTextBox x:Name ="ctbPhoneNumber" Grid.Row="3" Height="40" Width="250" Hint="Phone number"/>
         <ComboBox Name="cbMajor" Grid.Row="4" Height="35" Width="250" FontSize="16" VerticalContentAlignment="Center"/>

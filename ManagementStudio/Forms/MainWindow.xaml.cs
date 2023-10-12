@@ -30,8 +30,23 @@ namespace ManagementStudio.Forms
             mySQL = new MySQLite();
             User adminUser = new User("admin","12345", Constants.Permissions.Admin);
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
-        private void btnAddStudent_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (Student student in Student.GetAllStudents())
+            {
+                gvStudents.Items.Add(student);
+            }
+        }
+        private void miDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void miAdd_Click(object sender, RoutedEventArgs e)
         {
             AddStudentWindow addStudentWindow = new AddStudentWindow();
             if (addStudentWindow.ShowDialog() == true)
@@ -44,18 +59,14 @@ namespace ManagementStudio.Forms
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Setter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Application.Current.Shutdown();
+
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void gvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          
-            foreach (Student student in Student.GetAllStudents())
-            {
-                gvStudents.Items.Add(student);
-            }
+
         }
     }
 }

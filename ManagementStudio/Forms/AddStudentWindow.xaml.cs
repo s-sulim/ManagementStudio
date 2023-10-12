@@ -37,5 +37,10 @@ namespace ManagementStudio.Forms
             Student student = new Student(ctbName.Text, ctbLastName.Text, ctbEmail.Text, ctbPhoneNumber.Text, cbMajor.Text);
             this.DialogResult = true;
         }
+
+        private void ctbLastName_TouchLeave(object sender, TouchEventArgs e)
+        {
+            ctbEmail.Text = ctbName.Text.ToLower() + "." + ctbLastName.Text.ToLower() + "@gmail.com";
+        }
     }
 }

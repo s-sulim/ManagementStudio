@@ -6,14 +6,21 @@
         xmlns:local="clr-namespace:ManagementStudio.Forms"
         mc:Ignorable="d"
         Title="My Students" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ContextMenu x:Key="ctxMenuRow">
+            <MenuItem Name ="miDelete" Header="Delete this student" Click="miDelete_Click" >
+                <MenuItem.Icon>
+                    <Image Source="/Forms/Images/delete.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="5*"/>
-
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="1" Foreground="Black" FontSize="16" FontWeight="Bold" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
-                  IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False">
+        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="0" Foreground="Black" FontSize="16" FontWeight="Bold" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                  IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single" SelectionChanged="gvStudents_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Student ID" Binding="{Binding StudentID}"  Width="*"/>
                 <DataGridTextColumn Header="First name"  Binding="{Binding FirstName}" Width="*"/>
@@ -22,6 +29,11 @@
                 <DataGridTextColumn Header="Phone Number"  Binding="{Binding PhoneNumber}"  Width="*"/>
                 <DataGridTextColumn Header="Major"  Binding="{Binding Major}" Width="*"/>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ContextMenu" Value="{StaticResource ctxMenuRow}"/>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGreen"/>
@@ -29,13 +41,20 @@
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="BorderThickness" Value="0,0,1,2"/>
                     <Setter Property="BorderBrush" Value="DarkGray"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
+
             </DataGrid.Resources>
-
+            <DataGrid.ContextMenu>
+                <ContextMenu Name ="ctxMenuDataGrid">
+                    <MenuItem Name ="miAdd"  Header="Add new student" Click="miAdd_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Forms/Images/add.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
-        <ToolBar VerticalAlignment="Center" Grid.Row="0">
-            <Button x:Name="btnAddStudent" Content="Add student" Click="btnAddStudent_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        </ToolBar>
     </Grid>
-
+    
 </Window>
