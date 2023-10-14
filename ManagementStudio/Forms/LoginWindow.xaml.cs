@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ManagementStudio
 {
@@ -26,6 +27,7 @@ namespace ManagementStudio
     {
         private MySQLite mySQLite;
         private List<User> allUsers;
+        private User user;
         public LoginWindow()
         {
            
@@ -62,14 +64,32 @@ namespace ManagementStudio
         {
             if (allUsers.Any(u => u.Username == ctbUsername.Text && u.Password == ctbPassword.Password))
             {
-                MainWindow main = new MainWindow();
-                this.Hide();
-                main.Show();
+                this.user = GetUser();
+                switch (user.PermissionLevel)
+                {
+                    case Constants.Permissions.NormalUser:
+                        break;
+                    case Constants.Permissions.Manager:
+                        ManagerMainWindow managerMainWindow = new ManagerMainWindow();
+                        this.Hide();
+                        managerMainWindow.Show();
+                        break;
+                    case Constants.Permissions.Admin:
+                        AdminMainWindow adminMainWindow = new AdminMainWindow();
+                        this.Hide();
+                        adminMainWindow.Show();
+                        break;
+                }
             }
             else
             {
                 MessageBox.Show("Invalid username or password entered! Please, try again.", "Invalid username or passowrd", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+        private User GetUser()
+        {
+            User user = User.GetUserByUsername(ctbUsername.Text);
+            return user;
         }
     }
 }

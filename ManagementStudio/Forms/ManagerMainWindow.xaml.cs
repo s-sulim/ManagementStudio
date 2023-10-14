@@ -18,11 +18,11 @@ namespace ManagementStudio.Forms
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManagerMainWindow : Window
     {
         private MyDB myDB;
         private MySQLite mySQL;
-        public MainWindow()
+        public ManagerMainWindow()
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
@@ -34,39 +34,9 @@ namespace ManagementStudio.Forms
         {
             Application.Current.Shutdown();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (Student student in Student.GetAllStudents())
-            {
-                gvStudents.Items.Add(student);
-            }
-        }
-        private void miDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void miAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddStudentWindow addStudentWindow = new AddStudentWindow();
-            if (addStudentWindow.ShowDialog() == true)
-            {
-                gvStudents.Items.Clear();
-                foreach (Student student in Student.GetAllStudents())
-                {
-                    gvStudents.Items.Add(student);
-                }
-            }
-        }
-
-        private void Setter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void gvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+           
         }
     }
 }

@@ -12,18 +12,18 @@ namespace ManagementStudio.Classes
 {
     public class User
     {
-        private readonly int ID;
-        public readonly string Username;
-        public readonly string Password;
-        public readonly string CreationDate;
-        public readonly Permissions PermissionLevel;
+        private int UserID { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string CreationDate { get; set; }
+        public Permissions PermissionLevel { get; set; }
         private static MySQLite MySQL = new MySQLite();
 
         private User(int ID, string Username, string Password, string CreationDate, Permissions PermissionLevel)
         {
             if (!UserExists(ID))
             {
-                this.ID = ID;
+                this.UserID = ID;
                 this.Username = Username;
                 this.Password = Password;
                 this.CreationDate = CreationDate;
@@ -43,7 +43,7 @@ namespace ManagementStudio.Classes
                 MySQL.ExecuteNonQuery($"INSERT INTO Users (Username, Password, CreationDate, PermissionLevel) VALUES ('{Username}','{Password}','{DateTime.Now.ToString()}',{(int)PermissionLevel})");
             }
         }
-        public User GetUserByID(int ID)
+        public static User GetUserByID(int ID)
         {
             var res = MySQL.ExecuteQuery($"SELECT * FROM Users WHERE UserID = {ID};");
             if (res != null && res.Rows.Count > 0)
@@ -66,9 +66,33 @@ namespace ManagementStudio.Classes
             }
             return null;
         }
+        public static User GetUserByUsername(string Username)
+        {
+            var res = MySQL.ExecuteQuery($"SELECT * FROM Users WHERE Username = '{Username}';");
+            if (res != null && res.Rows.Count > 0)
+            {
+                Constants.Permissions Permission = Permissions.NormalUser;
+                int userPermissionInt = Convert.ToInt32(res.Rows[0]["PermissionLevel"]);
+                switch (userPermissionInt)
+                {
+                    case 0:
+                        Permission = Constants.Permissions.NormalUser;
+                        break;
+                    case 1:
+                        Permission = Constants.Permissions.Manager;
+                        break;
+                    case 2:
+                        Permission = Constants.Permissions.Admin;
+                        break;
+                }
+                User user = new User(Convert.ToInt32(res.Rows[0]["UserID"]), Convert.ToString(res.Rows[0]["Username"]), Convert.ToString(res.Rows[0]["Password"]), Convert.ToString(res.Rows[0]["CreationDate"]), Permission);
+                return user;
+            }
+            return null;
+        }
         private bool UserExists(int userID)
         {
-            if (MySQL.ExecuteQuery($"SELECT * FROM Users WHERE UserID = {ID};").Rows.Count == 0)
+            if (MySQL.ExecuteQuery($"SELECT * FROM Users WHERE UserID = {UserID};").Rows.Count == 0)
                 return false;
             else
                 return true;

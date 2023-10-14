@@ -1,12 +1,12 @@
-﻿<Window x:Class="ManagementStudio.Forms.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ManagementStudio.Forms"
-        mc:Ignorable="d"
-        Title="My Students" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded">
-    <Window.Resources>
+﻿<UserControl x:Class="ManagementStudio.UserControls.UsersGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ManagementStudio.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
         <ContextMenu x:Key="ctxMenuRow">
             <MenuItem Name ="miDelete" Header="Delete this student" Click="miDelete_Click" >
                 <MenuItem.Icon>
@@ -14,20 +14,18 @@
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid Name ="gvStudents" HeadersVisibility="Column" Grid.Row="0" Foreground="Black" FontSize="16" FontWeight="Bold" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
-                  IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single" SelectionChanged="gvStudents_SelectionChanged">
+        <DataGrid Name ="gvUsers" HeadersVisibility="Column" Grid.Row="0" Foreground="Black" FontSize="16" FontWeight="Bold" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                  IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Student ID" Binding="{Binding StudentID}"  Width="*"/>
-                <DataGridTextColumn Header="First name"  Binding="{Binding FirstName}" Width="*"/>
-                <DataGridTextColumn Header="Last name"  Binding="{Binding LastName}" Width="*"/>
-                <DataGridTextColumn Header="Email"  Binding="{Binding Email}" Width="*"/>
-                <DataGridTextColumn Header="Phone Number"  Binding="{Binding PhoneNumber}"  Width="*"/>
-                <DataGridTextColumn Header="Major"  Binding="{Binding Major}" Width="*"/>
+                <DataGridTextColumn Header="User ID" Binding="{Binding UserID}"  Width="*"/>
+                <DataGridTextColumn Header="Username"  Binding="{Binding Username}" Width="*"/>
+                <DataGridTextColumn Header="Creation Date"  Binding="{Binding CreationDate}" Width="*"/>
+                <DataGridTextColumn Header="PermissionLevel"  Binding="{Binding PermissionLevel}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -36,7 +34,7 @@
             </DataGrid.RowStyle>
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="LightGreen"/>
+                    <Setter Property="Background" Value="LightBlue"/>
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="BorderThickness" Value="0,0,1,2"/>
@@ -56,5 +54,4 @@
             </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
-    
-</Window>
+</UserControl>
